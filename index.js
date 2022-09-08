@@ -1,18 +1,22 @@
-import { argv } from 'node:process';
-import chalk from 'chalk';
+import kuler from 'kuler';
 import randomColor from 'randomcolor';
 
-const rdnColor = randomColor();
-const block = `#############################,#############################,#############################,#####                   #####,#####      ${rdnColor}      #####,#####                   #####,#############################,#############################,#############################`;
+const rdnColor = randomColor({
+  luminosity: process.argv[3],
+  hue: process.argv[2],
+});
 
-//console.log(chalk.hex(randomColor())(block.split(',').join('\r\n')));
-const colorBlock = chalk.hex(randomColor())(block.split(',').join('\r\n'));
-const colorInput = { luminosity: 'light', hue: 'blue' };
-colorInput.hue = argv[2];
-colorInput.luminosity = argv[3];
-
-if (argv[1]) {
-  console.log(colorBlock);
-}
-if (argv[2]) {
-}
+console.log(
+  kuler(
+    `     #############################
+     #############################
+     #############################
+     #####                   #####
+     #####      ${rdnColor}      #####
+     #####                   #####
+     #############################
+     #############################
+     #############################`,
+    rdnColor,
+  ),
+);
